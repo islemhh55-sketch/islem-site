@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiger Stream Overlay</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes ember-float {
+            0% { transform: translateY(0) translateX(0) rotate(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(20px) rotate(360deg); opacity: 0; }
+        }
+        .ember {
+            position: absolute;
+            bottom: -10px;
+            background: radial-gradient(circle, #ef4444 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: ember-float var(--duration) linear infinite;
+            animation-delay: var(--delay);
+        }
+        body {
+            background-color: black;
+            color: white;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body class="font-display">
+    <!-- Background Layers -->
+    <div id="bg-container" class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#450a0a_0%,_#000000_100%)] opacity-30 z-0"></div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative min-h-screen flex flex-col items-center justify-center z-10 px-4 text-center">
+        <!-- Animated Logo Container -->
+        <div class="mb-8 relative transform hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-red-600 blur-3xl opacity-20 animate-pulse"></div>
+            <!-- Tiger/Power Icon (SVG) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+        </div>
+
+        <!-- Headline Message -->
+        <div class="mb-12">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase italic text-glow">
+                Stream <span class="text-red-600">Starting</span>
+            </h1>
+            <p class="text-red-500/60 font-medium tracking-[0.5em] text-sm md:text-lg uppercase">
+                Prepare for dominance
+            </p>
+        </div>
+
+        <!-- Real-time Timer Display -->
+        <div id="timer" class="text-7xl md:text-9xl font-black tabular-nums drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+            05:00
+        </div>
+    </div>
+
+    <!-- Social Media Footer -->
+    <div class="absolute bottom-12 left-0 right-0 flex flex-wrap items-center justify-center gap-8 md:gap-12 z-10">
+        <!-- Twitter Account -->
+        <a href="https://x.com/islem_za1" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group cursor-pointer decoration-none">
+            <div class="p-2.5 border border-white/10 rounded-xl group-hover:border-red-500/50 group-hover:text-red-500 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+            </div>
+            <div class="flex flex-col items-start">
+                <span class="text-[10px] uppercase tracking-widest text-white/30 font-bold">Twitter</span>
+                <span class="text-sm font-semibold tracking-wide text-white/90 group-hover:text-white transition-colors">islem_za1</span>
+            </div>
+        </a>
+        <!-- Instagram Account -->
+        <a href="https://www.instagram.com/islem_za1/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group cursor-pointer decoration-none">
+            <div class="p-2.5 border border-white/10 rounded-xl group-hover:border-red-500/50 group-hover:text-red-500 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </div>
+            <div class="flex flex-col items-start">
+                <span class="text-[10px] uppercase tracking-widest text-white/30 font-bold">Instagram</span>
+                <span class="text-sm font-semibold tracking-wide text-white/90 group-hover:text-white transition-colors">islem_za1</span>
+            </div>
+        </a>
+        <!-- Youtube Account -->
+        <a href="https://www.youtube.com/@islemza" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group cursor-pointer decoration-none">
+            <div class="p-2.5 border border-white/10 rounded-xl group-hover:border-red-500/50 group-hover:text-red-500 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.42 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.42-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+            </div>
+            <div class="flex flex-col items-start">
+                <span class="text-[10px] uppercase tracking-widest text-white/30 font-bold">YouTube</span>
+                <span class="text-sm font-semibold tracking-wide text-white/90 group-hover:text-white transition-colors">islem za</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Logic Script -->
+    <script>
+        // 1. Countdown Timer Logic
+        let totalSeconds = 300; // 5 minutes
+        const timerDisplay = document.getElementById('timer');
+
+        function startTimer() {
+            const countdown = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(countdown);
+                    timerDisplay.textContent = "00:00";
+                    return;
+                }
+                
+                totalSeconds--;
+                const mins = Math.floor(totalSeconds / 60);
+                const secs = totalSeconds % 60;
+                
+                timerDisplay.textContent = 
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // 2. Dynamic Background Embers Effect
+        function createEmbers() {
+            const bgContainer = document.getElementById('bg-container');
+            const emberCount = 40;
+
+            for (let i = 0; i < emberCount; i++) {
+                const ember = document.createElement('div');
+                ember.className = 'ember shadow-lg shadow-red-500/20';
+                
+                const size = Math.random() * 4 + 2;
+                const leftPosition = Math.random() * 100;
+                const animDelay = Math.random() * 15;
+                const animDuration = Math.random() * 8 + 12;
+                
+                ember.style.width = `${size}px`;
+                ember.style.height = `${size}px`;
+                ember.style.left = `${leftPosition}%`;
+                ember.style.setProperty('--delay', `${animDelay}s`);
+                ember.style.setProperty('--duration', `${animDuration}s`);
+                
+                bgContainer.appendChild(ember);
+            }
+        }
+
+        // Initialize Screen
+        window.onload = () => {
+            startTimer();
+            createEmbers();
+        };
+    </script>
+</body>
+</html>
